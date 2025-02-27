@@ -1,1 +1,192 @@
+Easy SQL Interview Questions
+Welcome to the Easy SQL Interview Questions section!
+This category is designed for beginners and those looking to strengthen their foundational SQL skills.
+These questions cover essential topics such as basic queries, filtering data, sorting, and fundamental SQL functions.
+If you're new to SQL or preparing for an entry-level interview, this section will help you build a strong understanding of core SQL concepts.
+Author: Kirolos Girgis
 
+1- Can you write a query to select all records from a table called Customers?
+
+SELECT * 
+FROM Customers;
+
+2- Can you write a query to fetch all orders from the Orders table where the OrderAmount is greater than 500?
+
+SELECT * 
+FROM Orders
+WHERE OrderAmount > 500;
+
+3- Can you write a query to fetch customer names and sort them alphabetically from the Customers table?
+
+SELECT CustomerName 
+FROM Customers
+ORDER BY CustomerName ASC;
+
+4- Can you write a query to fetch only the FirstName and LastName columns from the Employees table?
+
+SELECT FirstName, 
+       LastName 
+FROM Employees;
+
+5- Can you write a query to find unique cities from the Customers table?
+
+SELECT DISTINCT City 
+FROM Customers;
+
+6- Can you write a query to count the total number of customers in the Customers table?
+
+SELECT COUNT(*) AS TotalCustomers 
+FROM Customers;
+
+7- Can you write a query to calculate the total sales from the Sales table?
+
+SELECT SUM(SalesAmount) AS TotalSales 
+FROM Sales;
+
+8- Can you write a query to group employees by their Department and count how many employees work in each department? 
+
+SELECT Department, 
+       COUNT(*) AS EmployeeCount
+FROM   Employees
+GROUP BY Department;
+
+9- Can you write a query to calculate the average salary of employees from the Employees table?
+
+SELECT AVG(Salary) AS AverageSalary 
+FROM Employees;
+
+10- Can you write a query to find the highest order amount from the Orders table?
+
+SELECT MAX(OrderAmount) AS HighestOrder
+FROM Orders;
+
+11- Can you write a query to fetch customer names and their respective order amounts by joining the Customers and Orders tables?
+
+SELECT Customers.CustomerName,
+       Orders.OrderAmount
+FROM Customers
+INNER JOIN Orders
+ON Customers.CustomerID = Orders.CustomerID;
+
+12- Can you write a query to fetch all customers and their order details, even if the customer has not placed an order?
+
+SELECT Customers.CustomerName,
+       Orders.OrderAmount
+FROM Customers
+LEFT JOIN Orders
+ON Customers.CustomerID = Orders.CustomerID;
+
+13- Can you write a query to fetch all orders and the customer details for those orders, even if the customer information is missing?
+
+SELECT Orders.OrderID, 
+       Customers.CustomerName
+FROM Orders
+RIGHT JOIN Customers
+ON Customers.CustomerID = Orders.CustomerID;
+
+14- Can you write a query to generate all possible combinations of rows between the Products and Categories tables?
+
+SELECT Products.ProductName,
+       Categories.CategoryName
+FROM Products
+CROSS JOIN Categories;
+
+15- Can you write a query to fetch all employees whose DepartmentID is in (1, 2, 3)?
+
+SELECT EmployeeName 
+FROM Employees
+WHERE DepartmentID IN (1, 2, 3);
+
+16- Can you write a query to fetch orders where the OrderDate is between '2023-01-01' and '2023-12-31'?
+
+SELECT * 
+FROM Orders
+WHERE OrderDate BETWEEN '2023-01-01' AND '2023-12-31';
+
+17- Write a query to find employees who earn more than the average salary in the Employees table.
+
+SELECT EmployeeName 
+FROM Employees
+WHERE Salary > (SELECT AVG(Salary) FROM Employees);
+
+18- Can you write a query to check if there are any orders from a specific customer with CustomerID = 10?
+
+SELECT * 
+FROM Orders
+WHERE EXISTS (
+    SELECT 1 
+    FROM Customers 
+    WHERE Customers.CustomerID = Orders.CustomerID AND Customers.CustomerID = 10);
+
+19- Can you write a query to insert a new customer into the Customers table with Name = 'John Doe' and City = 'Seattle'?
+
+INSERT INTO Customers (CustomerName, City)
+VALUES ('John Doe', 'Seattle');
+
+20- Can you write a query to update the OrderStatus to 'Shipped' for orders where OrderID = 100?
+
+UPDATE Orders
+SET OrderStatus = 'Shipped'
+WHERE OrderID = 100;
+
+21- Can you write a query to delete all records from the Customers table where the City is NULL?
+
+DELETE FROM Customers
+WHERE City IS NULL;
+
+22- Can you write a query to create a table called Products with columns: ProductID, ProductName, Price?
+
+CREATE TABLE Products (
+    ProductID INT PRIMARY KEY,
+    ProductName VARCHAR(100),
+    Price DECIMAL(10, 2));
+
+23- Can you write a query to delete the OldProducts table from the database?
+
+DROP TABLE OldProducts;
+
+24- Can you write a query to find the second highest order amount from the Orders table?
+
+SELECT MAX(OrderAmount) AS SecondHighestOrder
+FROM Orders
+WHERE OrderAmount < (SELECT MAX(OrderAmount) FROM Orders);
+
+25- Can you write a query to find all customers who have not placed any orders?
+
+SELECT CustomerName
+FROM Customers
+WHERE CustomerID NOT IN (SELECT CustomerID FROM Orders);
+
+26- Can you write a query to update the price of all products in the products table by 10%?
+
+UPDATE Products
+SET Price = Price * 1.10;
+
+27- Can you write a query to find the total number of orders placed by each customer?
+
+SELECT CustomerID, 
+       COUNT(OrderID) AS TotalOrders
+FROM Orders
+GROUP BY CustomerID;
+
+28- Can you write a query to fetch all employees who have been hired after 01/01/2020?
+
+SELECT EmployeeName
+FROM Employees
+WHERE HireDate > '2020-01-01';
+
+29- Can you write a query to fetch the product names and their prices from the products table where the price is greater than 50?
+
+SELECT ProductName, 
+       Price
+FROM Products
+WHERE Price > 50;
+
+30- Can you write a query to find the customers with the highest total order amount?
+
+SELECT CustomerID, 
+       SUM(OrderAmount) AS TotalSpent
+FROM Orders
+GROUP BY CustomerID
+ORDER BY TotalSpent DESC
+LIMIT 1;
