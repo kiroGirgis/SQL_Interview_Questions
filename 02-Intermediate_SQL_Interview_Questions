@@ -92,3 +92,175 @@ FROM Employees;
 
 ANSWER:
 A subquery is a query within another query. It is used to return data that will be used by the outer query. A subquery can be used in the SELECT, FROM, WHERE, or HAVING clauses
+
+9) What is a Common Table Expression (CTE) in SQL, and how is it different from a subquery?
+
+ANSWER:
+A Common Table Expression (CTE) is a temporary result set defined within the execution scope of a single SQL statement using the WITH clause. It improves readability and maintainability by breaking complex queries into smaller parts.
+Key differences from a subquery:
+
+A CTE can be referenced multiple times in a query, while a subquery is evaluated once per execution.
+CTEs improve query readability, making them useful for recursive queries.
+Example:
+
+WITH EmployeeCTE AS (
+    SELECT Department, COUNT(*) AS EmployeeCount
+    FROM Employees
+    GROUP BY Department
+)
+SELECT * FROM EmployeeCTE WHERE EmployeeCount > 10;
+
+10) What are Window Functions in SQL?
+
+ANSWER:
+Window functions perform calculations across a specified range of rows related to the current row, without collapsing them into a single output like aggregate functions.
+
+Common window functions:
+
+ROW_NUMBER(): Assigns a unique row number to each row.
+RANK(): Assigns a rank with gaps for duplicates.
+DENSE_RANK(): Assigns a rank without gaps.
+LEAD() and LAG(): Access next and previous row values.
+Example:
+
+SELECT EmployeeID, Department, Salary, 
+       RANK() OVER (PARTITION BY Department ORDER BY Salary DESC) AS Rank
+FROM Employees;
+
+11) What is the difference between DELETE, TRUNCATE, and DROP?
+
+ANSWER:
+DELETE: Removes specific rows based on a condition; can be rolled back.
+TRUNCATE: Removes all rows from a table; cannot be rolled back.
+DROP: Deletes the table entirely, including structure and indexes.
+
+12) What is the purpose of the COALESCE() function in SQL?
+ANSWER:
+COALESCE() returns the first non-NULL value from a list of expressions. It's useful for handling NULL values.
+Example:
+SELECT EmployeeID, COALESCE(Bonus, 0) AS BonusAmount
+FROM Employees;
+
+13) What is the difference between a primary key and a foreign key?
+ANSWER:
+Primary Key: Uniquely identifies each row in a table. Cannot be NULL.
+Foreign Key: Establishes a relationship between two tables, referencing a primary key from another table.
+
+14) What is a Self Join, and when would you use it?
+
+ANSWER:
+A Self Join is a join where a table is joined with itself. It is useful when comparing rows within the same table, such as hierarchical structures (e.g., employee-manager relationships).
+Example:
+SELECT e1.EmployeeID, e1.Name, e2.Name AS ManagerName
+FROM Employees e1
+LEFT JOIN Employees e2 ON e1.ManagerID = e2.EmployeeID;
+
+15) How do you optimize SQL queries for better performance?
+
+ANSWER:
+Use indexes to speed up lookups.
+Avoid SELECT *, specify only necessary columns.
+Use joins efficiently (prefer INNER JOIN when possible).
+Avoid correlated subqueries; use joins instead.
+Use EXPLAIN PLAN to analyze query execution.
+
+16) What is the difference between EXISTS and IN?
+
+ANSWER:
+IN: Checks if a value exists in a list or subquery result.
+EXISTS: Checks if a subquery returns at least one row, often more efficient for large datasets.
+Example:
+SELECT * FROM Employees WHERE DepartmentID IN (SELECT DepartmentID FROM Departments);
+SELECT * FROM Employees WHERE EXISTS (SELECT 1 FROM Departments WHERE Employees.DepartmentID = Departments.DepartmentID);
+
+17) What is Normalization? Explain the different normal forms.
+
+ANSWER:
+Normalization organizes a database to minimize redundancy and improve integrity.
+
+1NF: Ensures atomicity (each field contains only one value).
+2NF: Removes partial dependencies (every non-key column depends on the entire primary key).
+3NF: Removes transitive dependencies (non-key columns must depend only on the primary key).
+
+18) What are stored procedures, and why are they used?
+
+ANSWER:
+A Stored Procedure is a precompiled SQL script stored in the database that executes a sequence of SQL statements.
+Advantages:
+Improves performance by reducing query parsing time.
+Enhances security by restricting direct table access.
+Allows parameterized execution for reusability.
+Example:
+CREATE PROCEDURE GetEmployeesByDepartment (@DeptID INT)
+AS
+BEGIN
+    SELECT * FROM Employees WHERE DepartmentID = @DeptID;
+END;
+
+19) What is the difference between a Clustered Index and a Non-Clustered Index?
+
+ANSWER:
+Clustered Index: Determines the physical order of rows in a table (only one per table).
+Non-Clustered Index: Creates a separate structure for lookups (multiple allowed per table).
+
+20) What are Transactions in SQL, and why are they important?
+
+ANSWER:
+A Transaction ensures multiple operations execute as a single unit. It follows ACID properties (Atomicity, Consistency, Isolation, Durability).
+Example:
+BEGIN TRANSACTION;
+UPDATE Accounts SET Balance = Balance - 100 WHERE AccountID = 1;
+UPDATE Accounts SET Balance = Balance + 100 WHERE AccountID = 2;
+COMMIT TRANSACTION;
+
+21) What is the difference between ROW_NUMBER(), RANK(), and DENSE_RANK()?
+ANSWER:
+ROW_NUMBER(): Assigns unique numbers to each row.
+RANK(): Assigns rank but skips numbers for duplicates.
+DENSE_RANK(): Assigns rank without gaps.
+Example:
+SELECT EmployeeID, Salary, 
+       ROW_NUMBER() OVER (ORDER BY Salary DESC) AS RowNum,
+       RANK() OVER (ORDER BY Salary DESC) AS RankNum,
+       DENSE_RANK() OVER (ORDER BY Salary DESC) AS DenseRankNum
+FROM Employees;
+
+22) What is a Recursive CTE in SQL?
+
+ANSWER:
+A Recursive CTE allows a query to refer to itself, useful for hierarchical data like organizational charts.
+Example:
+WITH EmployeeHierarchy AS (
+    SELECT EmployeeID, Name, ManagerID, 1 AS Level
+    FROM Employees WHERE ManagerID IS NULL
+    UNION ALL
+    SELECT e.EmployeeID, e.Name, e.ManagerID, eh.Level + 1
+    FROM Employees e
+    JOIN EmployeeHierarchy eh ON e.ManagerID = eh.EmployeeID
+)
+SELECT * FROM EmployeeHierarchy;
+
+23) How do you prevent SQL injection?
+
+ANSWER:
+Use parameterized queries or prepared statements.
+Avoid dynamic SQL with user input.
+Use stored procedures for database operations.
+Apply least privilege access controls.
+
+24) What is a Deadlock in SQL, and how do you resolve it?
+
+ANSWER:
+A Deadlock occurs when two or more transactions wait indefinitely for each other to release locks.
+Prevention Strategies:
+Ensure consistent locking order.
+Keep transactions short.
+Use NOLOCK hints when appropriate.
+Implement deadlock detection and retry mechanisms.
+
+25) What is an Execution Plan, and how can you use it for query optimization?
+
+ANSWER:
+An Execution Plan shows how SQL Server executes a query. It helps identify performance bottlenecks like table scans, missing indexes, and inefficient joins.
+Use:
+EXPLAIN ANALYZE SELECT * FROM Employees WHERE Salary > 50000;
