@@ -8,7 +8,8 @@ Author: Kirolos Girgis
 1) What are window functions in SQL? with some Examples
 
 ANSWER:
-Window functions in SQL perform calculations across a set of table rowws that are related to the current row, without collapsing the result set into a single row like aggregate functions do. Window functions are used with the OVER() clause. For example, the RANK() function assigns a rank to each row. Also the SUM(), AVG() and COUNT() can be used as window functions
+Window functions in SQL perform calculations across a set of table rowws that are related to the current row, without collapsing the result set into a single row like aggregate functions do.
+Window functions are used with the OVER() clause. For example, the RANK() function assigns a rank to each row. Also the SUM(), AVG() and COUNT() can be used as window functions
 
 2) What is the difference between UNION and INTERSECT in SQL?
 
@@ -23,17 +24,20 @@ JOIN combines rows from two or more tables based on a related column (column tha
 4) What is the difference between a PRIMARY KEY and a FOREIGN KEY?
 
 ANSWER:
-A PRIMARY KEY identifies each record in a table uniquely. A table can have only one primary key, and the primary key columns cannot have NULL values. On the other hand, A column or group of columns in a table that is used to establish a link between data in two tables. A foregin key in one table refers to the primary key of another table.
+A PRIMARY KEY identifies each record in a table uniquely. A table can have only one primary key, and the primary key columns cannot have NULL values. On the other hand, A column or group of columns in a table that is used to establish a link between data in two tables. 
+A foregin key in one table refers to the primary key of another table.
 
 5) What are common techniques to handle large Datasets in SQL?
 
 ANSWER:
-Handling large datasets efficently is crucial in database management. there are some techniques that can be used to handle large datasets such as partitioning which is splitting large tables into smaller, and more manageable pieces, typically based on the ranges of data. Another technique that can be used is Data Archiving, which involves archiving old or less frequently accessed data to separate tables or databases. Another technique will be indexting, we use indexing to speed up a query performance on large datasets.
+Handling large datasets efficently is crucial in database management. there are some techniques that can be used to handle large datasets such as partitioning which is splitting large tables into smaller, and more manageable pieces, typically based on the ranges of data.
+Another technique that can be used is Data Archiving, which involves archiving old or less frequently accessed data to separate tables or databases. Another technique will be indexting, we use indexing to speed up a query performance on large datasets.
 
 6) How do you optimize a query for better performance?
 
 ANSWER:
-A query optimization can improve the speed and efficiency of SQL Queries. some methods used to optimize query performance is by avoiding SELECT * by selecting only rhe columns you need you reduce the amount of data being processed. another method is using EXPLAIN function which analyzes the exuecution plan of a querie to identify performance bottlenecks.
+A query optimization can improve the speed and efficiency of SQL Queries. some methods used to optimize query performance is by avoiding SELECT * by selecting only rhe columns you need you reduce the amount of data being processed. 
+another method is using EXPLAIN function which analyzes the exuecution plan of a querie to identify performance bottlenecks.
 
 7) What is a recursive query in SQL?
 
@@ -43,7 +47,8 @@ A recursive query is used to query hierarchical data, such as organizational str
 8) Explain the EXPLAIN command in SQL?
 
 ANSWER:
-The EXPLAIN command is used to display the execution plan of a query. It provides insight into how the database optimizer is planning to execute a query, including how tables are joined, the order of operations, and whether indexes are used. It is a valuable tool for query optimization.
+The EXPLAIN command is used to display the execution plan of a query. It provides insight into how the database optimizer is planning to execute a query, including how tables are joined, the order of operations, and whether indexes are used.
+It is a valuable tool for query optimization.
 
 9) What is ACID in SQL?
 
