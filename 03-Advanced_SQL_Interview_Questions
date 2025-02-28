@@ -54,3 +54,100 @@ ACID stands for Atomicity, Consistency, Isolation, and Durability. These are pro
 2- Consistency: Ensures that the database transitions from one valid state to another, preserving data integrity.
 3- Isolation: Ensures that concurrent transactions do not interfere with each other.
 4- Durability: Ensures that once a transaction is committed, it remains permanent, even in the event of a system failure.
+
+10) What is the difference between clustered and non-clustered indexes?
+
+ANSWER:
+A clustered index determines the physical order of data in a table and can only be one per table. The table rows are stored in the order of the clustered index.
+A non-clustered index does not affect the physical order of data; instead, it maintains a separate structure pointing to the actual rows in the table. A table can have multiple non-clustered indexes.
+
+11) What are stored procedures in SQL, and why are they useful?
+
+ANSWER:
+Stored procedures are precompiled collections of SQL statements stored in the database that can be executed as a single unit. They improve performance, promote code reuse, enhance security, and reduce network traffic by executing logic directly within the database.
+
+12) What is the difference between TRUNCATE, DELETE, and DROP?
+
+ANSWER:
+DELETE: Removes specific rows based on a condition, can be rolled back, and maintains table structure.
+TRUNCATE: Removes all rows from a table without logging individual row deletions, cannot be rolled back, and resets identity columns.
+DROP: Removes the entire table, including its structure and data, and cannot be rolled back.
+
+13) What is normalization, and what are its different forms?
+
+ANSWER:
+Normalization is the process of organizing data in a database to reduce redundancy and improve integrity. The normal forms include:
+1NF (First Normal Form): Ensures atomicity, removing duplicate columns.
+2NF (Second Normal Form): Ensures that all non-key attributes depend entirely on the primary key.
+3NF (Third Normal Form): Ensures that non-key attributes do not depend on other non-key attributes (removes transitive dependencies).
+BCNF (Boyce-Codd Normal Form): Ensures every determinant is a candidate key.
+
+14) What is denormalization, and when should you use it?
+
+ANSWER:
+Denormalization is the process of introducing redundancy into a database to improve read performance. It is used in scenarios requiring fast retrieval, such as reporting systems or data warehouses.
+
+15) What are materialized views, and how do they differ from regular views?
+
+ANSWER:
+A materialized view stores the query result physically and can be refreshed periodically, improving performance for complex queries. A regular view is a virtual table that does not store data and retrieves fresh results upon each execution.
+
+16) What is sharding in SQL databases?
+
+ANSWER:
+Sharding is a database partitioning technique where data is distributed across multiple servers to improve performance and scalability.
+
+17) What is the difference between horizontal and vertical partitioning?
+
+ANSWER:
+Horizontal partitioning distributes rows across multiple tables or databases (e.g., by region or date).
+Vertical partitioning distributes columns across multiple tables to improve query efficiency.
+
+18) What is a deadlock in SQL, and how can it be prevented?
+
+ANSWER:
+A deadlock occurs when two or more transactions hold locks that the other transactions need, preventing progress. Prevention techniques include:
+Using consistent locking order
+Implementing lock timeouts
+Reducing transaction scope
+Using deadlock detection mechanisms
+
+19) What are transactions, and how do you implement them in SQL?
+
+ANSWER:
+A transaction is a sequence of SQL statements that must be executed as a single unit. They are implemented using:
+BEGIN TRANSACTION;
+-- SQL statements
+COMMIT; -- To save changes
+ROLLBACK; -- To undo changes if needed
+
+20) What is a cross join in SQL?
+
+ANSWER:
+A CROSS JOIN returns the Cartesian product of two tables, meaning every row from the first table is combined with every row from the second table.
+
+21) What is a pivot table in SQL, and how is it used?
+
+ANSWER:
+A pivot table transforms rows into columns, making it useful for reporting. It is implemented using the PIVOT function in SQL.
+
+22) What is JSON data type in SQL, and how do you query JSON data?
+
+ANSWER:
+The JSON data type stores JSON-formatted data in SQL databases. You can query JSON fields using functions like:
+SELECT json_column->>'key' FROM table_name;
+
+23) What are event triggers in SQL?
+
+ANSWER:
+Event triggers automatically execute a stored procedure or SQL script when certain database events occur, such as INSERT, UPDATE, or DELETE operations.
+
+24) What is lateral join in SQL?
+
+ANSWER:
+A LATERAL JOIN allows subqueries to reference columns from previous tables in the FROM clause. It is useful for complex queries where each row from the left table needs to be processed individually.
+
+25) What are surrogate keys, and how do they differ from natural keys?
+
+ANSWER:
+A surrogate key is an artificial unique identifier (e.g., an auto-incremented column). A natural key is derived from existing data attributes, such as a Social Security Number.
