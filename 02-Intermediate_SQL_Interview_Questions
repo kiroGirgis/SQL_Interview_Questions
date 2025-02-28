@@ -32,7 +32,8 @@ SELECT *
 FROM Employees
 WHERE Department IS NOT NULL;
 
-Option 3) A query like COALESCE() is used to return the first non-NULL value from a list of arguments It's commonly used when you want to handle NULL values in your data and replace them with a more meaningful or default value. for example you have a customer list that you want to check if customers provided a phone number and if they did not you want to replace the empty cell with N/A
+Option 3) A query like COALESCE() is used to return the first non-NULL value from a list of arguments It's commonly used when you want to handle NULL values in your data and replace them with a more meaningful or default value. 
+for example you have a customer list that you want to check if customers provided a phone number and if they did not you want to replace the empty cell with N/A
 
 SELECT COALESCE(PhoneNumber, 'N/A')
 FROM Customers;
@@ -51,7 +52,8 @@ The GROUP BY clause is used to group rows that have the same values into summary
 
 ANSWER:
 
-WHERE is used to filter rows before any grouping is done. It is used with individual rows to filter them based on a condition. On the other hand HAVING is used to filter groups after the GROUP BY clause. It is used when you need to filter groups based on aggregated data. for example the query below uses HAVIN to filter the departments that contains more than 5 employees
+WHERE is used to filter rows before any grouping is done. It is used with individual rows to filter them based on a condition. On the other hand HAVING is used to filter groups after the GROUP BY clause. It is used when you need to filter groups based on aggregated data.
+for example the query below uses HAVIN to filter the departments that contains more than 5 employees
 
 SELECT Department,
        COUNT(*) AS EmployeeCount
@@ -77,7 +79,8 @@ UNION is used when you are trying to combine the results of two queries and remo
 7) What are CASE statements in SQL?
 
 ANSWER:
-A CASE statement in SQL is used to perform conditional logic inside a SQL query. It has a similar functions to IF-THEN ELSE statements. It allows you to return differnt values based on conditions. For example, the following query will return the value High if employee salary is more than 50,000 and the value Medium if the employee salary is between 30,000 and 50,000 and anything else it will return the value Low
+A CASE statement in SQL is used to perform conditional logic inside a SQL query. It has a similar functions to IF-THEN ELSE statements. It allows you to return differnt values based on conditions.
+For example, the following query will return the value High if employee salary is more than 50,000 and the value Medium if the employee salary is between 30,000 and 50,000 and anything else it will return the value Low
 
 SELECT EmployeeID, 
        Salary, 
